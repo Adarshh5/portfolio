@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adarsh - Python Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --highlight-color: #00d4ff;
+            --text-light: #e0e0e0;
+            --text-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--highlight-color);
+            border-radius: 5px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(26, 26, 46, 0.95) !important;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--highlight-color) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            margin: 0 0.8rem;
+            font-weight: 500;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--highlight-color);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            animation: wave 10s linear infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .profile-img {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 6px solid var(--highlight-color);
+            object-fit: cover;
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.4);
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--highlight-color), transparent);
+            z-index: 1;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s;
+        }
+
+        .hero-section .lead {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--highlight-color);
+            animation: fadeInUp 1.2s;
+        }
+
+        .typing-effect {
+            display: inline-block;
+            border-right: 3px solid var(--highlight-color);
+            padding-right: 5px;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--highlight-color); }
+            51%, 100% { border-color: transparent; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-links {
+            animation: fadeInUp 1.4s;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: all 0.3s;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            border: 2px solid var(--highlight-color);
+            border-radius: 50%;
+            text-align: center;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: var(--highlight-color);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--highlight-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+        }
+
+        .about-content {
+            font-size: 1.2rem;
+            line-height: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #555;
+        }
+
+        .about-content p {
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .skill-badge {
+            background: white;
+            color: var(--primary-color);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .skill-badge:hover::before {
+            left: 100%;
+        }
+
+        .skill-badge:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+            background: var(--highlight-color);
+            color: white;
+        }
+
+        /* Projects Section */
+        .projects-section {
+            background: white;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 50px;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Image Carousel */
+        .project-carousel {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 212, 255, 0.8);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: var(--highlight-color);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-btn.prev {
+            left: 15px;
+        }
+
+        .carousel-btn.next {
+            right: 15px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator-dot.active {
+            background: var(--highlight-color);
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .project-content {
+            padding: 35px;
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .tech-stack {
+            margin-bottom: 25px;
+        }
+
+        .tech-stack strong {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            margin: 6px 4px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+
+        .tech-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .project-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .project-links a:hover {
+            background: var(--highlight-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+        }
+
+        .contact-section .section-title {
+            color: white;
+        }
+
+        .contact-section .section-title::before {
+            background: var(--highlight-color);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-item i {
+            font-size: 2.5rem;
+            color: var(--highlight-color);
+            margin-bottom: 15px;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--highlight-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section .lead {
+                font-size: 1.4rem;
+            }
+            
+            .profile-img {
+                width: 170px;
+                height: 170px;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .project-carousel {
+                height: 250px;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Adarsh Gupta</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container text-center">
+            <div class="hero-content">
+                <div class="profile-container">
+                    <img src="images/myselfy.jpg" alt="Profile Picture" class="profile-img" id="profileImage">
+                </div>
+                <h1>Adarsh Gupta</h1>
+                <p class="lead"><span class="typing-effect">Python Developer</span></p>
+                <div class="social-links">
+                    <a href="https://github.com/Adarshh5" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://x.com/Adarshh111" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:adarshguptaa1111@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p>
+                    I am a passionate Python Developer specializing in building robust backend systems and scalable applications. 
+                    With expertise in modern frameworks and technologies, I focus on creating efficient, maintainable, and 
+                    high-performance solutions. I have experience working with Django, FastAPI, and various cloud technologies 
+                    to deliver enterprise-grade applications.
+                </p>
+                <p>
+                    My approach combines clean code practices with modern development methodologies, including CI/CD pipelines, 
+                    containerization, and MLOps. I'm dedicated to continuous learning and staying updated with the latest 
+                    technologies in the Python ecosystem.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-container">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">Django</span>
+                <span class="skill-badge">FastAPI</span>
+                <span class="skill-badge">LangChain</span>
+                <span class="skill-badge">LangGraph</span>
+                <span class="skill-badge">PostgreSQL</span>
+                <span class="skill-badge">MySQL</span>
+                <span class="skill-badge">Redis</span>
+                <span class="skill-badge">MLOps</span>
+                <span class="skill-badge">Docker</span>
+                <span class="skill-badge">CI/CD</span>
+                <span class="skill-badge">GCP</span>
+                <span class="skill-badge">Agent Building</span>
+                <span class="skill-badge">Backend Development</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            
+            <!-- Project 1 - Main Project with 3 Images -->
+            <div class="project-card">
+                <div class="project-carousel" data-carousel="project1">
+                    <div class="carousel-images">
+                        <img src="images\faststart1.png" alt="Project 1 Image 1">
+                        <img src="images\faststart2.png" alt="Project 1 Image 2">
+                        <img src="images\faststart3.png" alt="Project 1 Image 3">
+                    </div>
+                    <button class="carousel-btn prev" onclick="changeSlide('project1', -1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next" onclick="changeSlide('project1', 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-indicators">
+                        <span class="indicator-dot active" onclick="goToSlide('project1', 0)"></span>
+                        <span class="indicator-dot" onclick="goToSlide('project1', 1)"></span>
+                        <span class="indicator-dot" onclick="goToSlide('project1', 2)"></span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title"> FastStart</h3>
+                    <p class="project-description">
+                         FastStart - An AI-Powered Adaptive English Learning Platform The Problem: Why Do Most Learners Struggle with English? Learning English can be frustrating. Most apps and books overwhelm you with every grammar rule, often explained in complex English that a beginner can't understand. This leads to confusion and boredom. <br> <br>
+
+But the bigger problem is forgetting. You learn a new word or rule today, but without constant practice, your brain forgets it. You might try to listen to advanced YouTube videos or chat with AI, but if they use vocabulary you don't know, you get stuck, feel frustrated, and lose confidence. Traditional methods fail to create a personalized environment where you can actually use and remember what you've learned. <br><br>
+
+My Solution: A Platform That Learns With You I built FastStart to solve this exact problem. It’s not just another learning app; it's a smart platform that adapts to your personal learning journey. The core idea is simple: weave everything you learn back into your practice, so you never forget. <br><br>
+
+How It Works & Why It's Unique<br>
+
+Smart, Spoken-Focused Grammar & Vocabulary<br>
+We don't teach every grammar rule. We focus only on the grammar used in everyday spoken English.
+
+Grammar is explained in your native language first, so you actually understand the "why" and "when" to use it, not just the rule.
+
+Vocabulary starts at your level and gradually becomes more advanced. Each word comes with the best examples to help you understand the context.<br><br>
+
+The Secret Sauce: Never Forget What You Learn This is what makes FastStart unique. When you mark a word or grammar rule as "learned," our AI remembers it.
+From that point on, our AI Tutor and story generator will primarily use the words and grammar you have already learned in your conversations and listening exercises.
+
+This means you get constant, effortless revision. You see the words in context, which helps them stick in your memory.
+
+The system intelligently prioritizes your most recent lessons and slowly phases out older ones as they become solid in your memory.
+
+The result? You can actually understand the English you read and hear in the app, which builds confidence and makes learning enjoyable.<br><br>
+
+Personalized Listening and Speaking Practice<br>
+Listening: Get YouTube recommendations and AI-generated stories that match your current level, so you can actually understand them.
+
+Speaking (AI Chat): Chat with an AI that uses your learned vocabulary. This makes conversations easier to understand and less frustrating, encouraging you to practice more.<br><br>
+
+Your Personal AI Tutor <br>
+Stuck on a grammar point? Ask the AI Tutor. It uses your course's internal documents (via RAG) to answer your questions, ensuring the explanation is consistent with how you were taught.
+
+Build a Thinking Habit<br>
+For every new word you learn, you are encouraged to write your own example sentence. This small habit trains your brain to think in English daily.<br><br>
+
+<br>Technical Implementation This is a full-stack project built as a Django Monolith for robustness and simplicity.
+
+Authentication: built in django authentication system with Google OAuth integration.
+
+Deployment: Deployed on Render with a custom domain.
+
+<br>FastStart is more than a project; it's a new approach to language learning, using smart technology to solve the real-world problems of forgetting and frustration.<br>
+
+
+                    </p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Langchain</span>
+                        <span class="tech-tag">Langgraph</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Adarshh5/faststart" target="_blank">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="https://faststart.in/" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 2 - Main Project with 3 Images -->
+            <div class="project-card">
+                <div class="project-carousel" data-carousel="project2">
+                    <div class="carousel-images">
+                        <img src="images\legal1.png" alt="Project 2 Image 1">
+                        <img src="images\legal2.png" alt="Project 2 Image 2">
+                        <img src="images\legal3.png" alt="Project 2 Image 3">
+                    </div>
+                    <button class="carousel-btn prev" onclick="changeSlide('project2', -1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next" onclick="changeSlide('project2', 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="carousel-indicators">
+                        <span class="indicator-dot active" onclick="goToSlide('project2', 0)"></span>
+                        <span class="indicator-dot" onclick="goToSlide('project2', 1)"></span>
+                        <span class="indicator-dot" onclick="goToSlide('project2', 2)"></span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">A Smarter Legal AI Assistant</h3>
+                    <p class="project-description">
+                        I've built a full-stack FastAPI backend that's ready to use. Think of it as the solid engine for a smart legal chatbot.
+
+What's Inside the Box? <br>
+
+Full User Login/Signup System: Secure JWT authentication using Redis for fast and safe user sessions. All standard endpoints are built and working perfectly.<br>
+
+The main feature is the AI legal assistant. It doesn't just give random answers; it intelligently decides the best way to help the user:<br>
+
+Direct Chat: If you ask a simple question, like "What did you do earlier?" or a general greeting, it will chat with you directly without overcomplicating things.<br>
+
+Deep Legal Knowledge (RAG): When your question is complex and needs deep knowledge of laws and the constitution, it smartly searches through its own internal database of legal documents. It double-checks to find the best answer. If it still can't find one, it tries to search the web for you.<br>
+
+Web Search for Latest Info: For questions about recent legal news or current events, it directly searches the web. It even tries with different search terms to get you a relevant result.<br>
+
+And if all else fails? The bot will still give you a helpful answer based on its own knowledge, but it will clearly tell you it's not from a verified source. We also use Redis to remember your chat history for a smooth, continuous conversation.<br>
+                    </p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">Langchain</span>
+                        <span class="tech-tag">Langgaph</span>
+                        <span class="tech-tag">CI/CD</span>
+                        <span class="tech-tag">Vector DB: Pinecone</span>
+                        <span class="tech-tag">Google Cloud Run</span>
+
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Adarshh5/legal-ragbot" target="_blank">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="https://legalbot-887418779704.us-central1.run.app/docs" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 3 - Single Image -->
+            <div class="project-card">
+                <div class="project-carousel" data-carousel="project3">
+                    <div class="carousel-images">
+                        <img src="images\billmaker.png" alt="Project 3">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Billmaker</h3>
+                    <p class="project-description">
+                          A web application designed to help small businesses generate and manage bills efficiently. The core system allows users to create multiple bills for different customers, track past transactions, and generate PDF invoices with dynamic discounts. The project was later extended with a secure REST authentication system, making it production-ready with jwt token-based authentication and cloud deployment.
+                    </p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong>
+                      
+                        <span class="tech-tag">Python</span>
+                         <span class="tech-tag">Django</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">CI/CD</span>
+                        <span class="tech-tag">postgres</span>
+                        <span class="tech-tag">GCP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Adarshh5/django-rest-framework-auth" target="_blank">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="https://django-rest-887418779704.asia-south1.run.app/" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project 4 - Single Image -->
+            <div class="project-card">
+                <div class="project-carousel" data-carousel="project4">
+                    <div class="carousel-images">
+                        <img src="images\ml1.png" alt="Project 4">
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Project Name 4</h3>
+                    <p class="project-description">
+                         This project is a scalable backend system built using FastAPI with integrated Machine Learning and Deep Learning models. 
+        It includes JWT-based authentication for secure user management, PostgreSQL for data storage, and cloud-based model hosting. 
+        The project also includes two AI models: a Legal RAG Bot for legal document assistance, a Heart Disease Prediction model, 
+        and an Intel Image Classification model for visual analysis. The entire system is deployed on Google Cloud Run with production-grade scalability.
+        <br><br>
+        🔑 Features:<br>
+        • Core FastAPI Backend<br>
+        – JWT-based authentication (login, register, password reset)<br>
+        – PostgreSQL database for user & session management<br>
+        – Cloud storage for ML & DL models<br>
+        – Deployed on Google Cloud Run<br>
+        – Error handling and production-grade scalability<br><br>
+
+
+        ❤️ Machine Learning Model – Heart Disease Prediction<br>
+        – Algorithm: XGBoost<br>
+        – Accuracy: 92%<br>
+        – Includes preprocessing pipeline<br>
+        – Model saved as joblib and stored in cloud storage<br>
+        – Integrated with FastAPI API endpoints<br><br>
+
+        🖼️ Deep Learning Model – Intel Image Classification<br>
+        – Dataset: Intel Image Classification Dataset<br>
+        – Pretrained Model: EfficientNet (fine-tuned)<br>
+        – Accuracy: 95% (train), 93% (test)<br>
+        – Framework: PyTorch<br>
+        – Model exported to ONNX format and stored in cloud storage<br>
+        – FastAPI endpoints for inference
+                    </p>
+                    <div class="tech-stack">
+                        <strong>Technologies:</strong>
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">XGBoost</span>
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">ONNX</span>
+                        <span class="tech-tag">Google Cloud Run</span>
+                        <span class="tech-tag">MLOps</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Adarshh5/legal-ragbot" target="_blank">
+                            <i class="fab fa-github"></i> View Code
+                        </a>
+                        <a href="https://legalbot-887418779704.us-central1.run.app/docs" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h5>Email</h5>
+                        <a href="mailto:adarshguptaa1111@gmail.com">adarshguptaa1111@gmail.com</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h5>Location</h5>
+                        <span>Burhar, India</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <div>
+                        <h5>LinkedIn</h5>
+                        <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank">Connect with me</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-github"></i>
+                    <div>
+                        <h5>GitHub</h5>
+                        <a href="https://github.com/Adarshh5" target="_blank">Check my repos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Adarsh. All rights reserved. Built with ❤️ using Bootstrap & JavaScript</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Carousel functionality
+        const carouselStates = {};
+
+        function initCarousel(carouselId) {
+            carouselStates[carouselId] = {
+                currentSlide: 0,
+                totalSlides: 0
+            };
+            
+            const carousel = document.querySelector(`[data-carousel="${carouselId}"]`);
+            if (carousel) {
+                const images = carousel.querySelectorAll('.carousel-images img');
+                carouselStates[carouselId].totalSlides = images.length;
+            }
+        }
+
+        function changeSlide(carouselId, direction) {
+            const state = carouselStates[carouselId];
+            if (!state || state.totalSlides <= 1) return;
+            
+            state.currentSlide += direction;
+            
+            if (state.currentSlide >= state.totalSlides) {
+                state.currentSlide = 0;
+            } else if (state.currentSlide < 0) {
+                state.currentSlide = state.totalSlides - 1;
+            }
+            
+            updateCarousel(carouselId);
+        }
+
+        function goToSlide(carouselId, slideIndex) {
+            const state = carouselStates[carouselId];
+            if (!state) return;
+            
+            state.currentSlide = slideIndex;
+            updateCarousel(carouselId);
+        }
+
+        function updateCarousel(carouselId) {
+            const state = carouselStates[carouselId];
+            const carousel = document.querySelector(`[data-carousel="${carouselId}"]`);
+            
+            if (!carousel) return;
+            
+            const imagesContainer = carousel.querySelector('.carousel-images');
+            const indicators = carousel.querySelectorAll('.indicator-dot');
+            
+            imagesContainer.style.transform = `translateX(-${state.currentSlide * 100}%)`;
+            
+            indicators.forEach((dot, index) => {
+                dot.classList.toggle('active', index === state.currentSlide);
+            });
+        }
+
+        // Initialize all carousels
+        document.addEventListener('DOMContentLoaded', function() {
+            initCarousel('project1');
+            initCarousel('project2');
+            initCarousel('project3');
+            initCarousel('project4');
+        });
+
+        // Auto-play carousels (optional)
+        setInterval(() => {
+            ['project1', 'project2'].forEach(id => {
+                if (carouselStates[id] && carouselStates[id].totalSlides > 1) {
+                    changeSlide(id, 1);
+                }
+            });
+        }, 5000);
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            // Update active nav link
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Navbar background on scroll
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Show/hide scroll to top button
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top functionality
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Typing effect
+        const typingText = document.querySelector('.typing-effect');
+        if (typingText) {
+            const text = typingText.textContent;
+            typingText.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    typingText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            setTimeout(typeWriter, 500);
+        }
+
+        // Console instructions
+        console.log(`
+╔════════════════════════════════════════════════════════════════════╗
+║                    PORTFOLIO CUSTOMIZATION GUIDE                    ║
+╚════════════════════════════════════════════════════════════════════╝
+
+📁 FOLDER STRUCTURE:
+your-portfolio/
+├── index.html
+├── images/
+│   ├── profile.jpg           (Your profile photo)
+│   ├── project1-1.jpg         (Project 1 - Image 1)
+│   ├── project1-2.jpg         (Project 1 - Image 2)
+│   ├── project1-3.jpg         (Project 1 - Image 3)
+│   ├── project2-1.jpg         (Project 2 - Image 1)
+│   ├── project2-2.jpg         (Project 2 - Image 2)
+│   ├── project2-3.jpg         (Project 2 - Image 3)
+│   ├── project3.jpg           (Project 3 - Single Image)
+│   └── project4.jpg           (Project 4 - Single Image)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🖼️ HOW TO ADD YOUR IMAGES:
+
+1. PROFILE IMAGE (Line ~458):
+   Replace: src="https://via.placeholder.com/220"
+   With:    src="images/profile.jpg"
+
+2. PROJECT 1 IMAGES (Lines ~517-519):
+   <img src="images/project1-1.jpg" alt="Project 1 Image 1">
+   <img src="images/project1-2.jpg" alt="Project 1 Image 2">
+   <img src="images/project1-3.jpg" alt="Project 1 Image 3">
+
+3. PROJECT 2 IMAGES (Lines ~548-550):
+   <img src="images/project2-1.jpg" alt="Project 2 Image 1">
+   <img src="images/project2-2.jpg" alt="Project 2 Image 2">
+   <img src="images/project2-3.jpg" alt="Project 2 Image 3">
+
+4. PROJECT 3 IMAGE (Line ~579):
+   <img src="images/project3.jpg" alt="Project 3">
+
+5. PROJECT 4 IMAGE (Line ~603):
+   <img src="images/project4.jpg" alt="Project 4">
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✏️ WHAT TO CUSTOMIZE:
+
+✓ Social Links (Lines ~463-466)
+✓ Project Titles (Lines ~541, 572, 592, 616)
+✓ Project Descriptions (Lines ~542-545, 573-576, 593-596, 617-620)
+✓ Tech Tags (Lines ~547-551, 578-582, 598-602, 622-626)
+✓ GitHub & Demo Links (Lines ~553-558, 584-589, 604-609, 628-633)
+✓ Contact Information (Lines ~648, 653, 658, 663)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 FEATURES INCLUDED:
+
+✅ Image carousel with next/prev buttons
+✅ Auto-play for main projects (5 second interval)
+✅ Indicator dots to jump to specific images
+✅ Smooth animations and transitions
+✅ Scroll to top button
+✅ Active navigation highlighting
+✅ Typing effect on hero section
+✅ Fully responsive design
+✅ Professional dark theme
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📱 RECOMMENDED IMAGE SIZES:
+- Profile: 220x220px (Square)
+- Projects: 1200x400px (3:1 ratio)
+
+Good luck with your portfolio! 🎉
+        `);
+    </script>
+
+</body>
+</html>
